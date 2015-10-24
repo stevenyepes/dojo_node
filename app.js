@@ -28,7 +28,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/search', function(req, res) {
-	var endPointSpotify = "https://api.spotify.com/v1/search"+"?q="+req.query.q+"&type=track&limit=10";
+	var endPointSpotify = "https://api.spotify.com/v1/search?q="+req.query.q+"type=track&limit=10";
 	// capturamos lo que llega en el Json
 	var buffer = "";
 
@@ -38,14 +38,15 @@ app.get('/search', function(req, res) {
 			buffer =+ d;
 		});
 
-		if(req.query.q != undefined && res.query.q != "") {
-				response.on('end', function(err) {
+		response.on('end', function(err) {
 
-				res.render('index', {items: JSON.parse(buffer).tracks.items});
+			if(req.query.q != undefined && req.query.q !="" ){
+		    			res.render('index', {items: JSON.parse(buffer).tracks.items});
+			}else{
+ 				res.render('index');
+			}
 
-			});
-		}
-		
+		});
 	});
 
 });
