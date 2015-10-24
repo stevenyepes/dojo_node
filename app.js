@@ -28,7 +28,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/search', function(req, res) {
-	var endPointSpotify = "https://api.spotify.com/v1/search?q="+req.query.q+"type=track&limit=10";
+	var endPointSpotify = "https://api.spotify.com/v1/search"+"?q="+req.query.q+"&type=track&limit=10";
 	// capturamos lo que llega en el Json
 	var buffer = "";
 
